@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Omendon Unified Dashboard</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+	<style>
+		body { font-family: 'Inter', sans-serif; }
+		.glass { background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); backdrop-filter: blur(16px); }
+		.active-link { color: #06b6d4; font-weight: 600; }
+		.badge { padding: 0.25rem 0.6rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; display: inline-block; }
+		.hidden { display: none; }
+	</style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white min-h-screen flex flex-col">
+	<!-- HEADER -->
+	<header class="flex items-center justify-between px-6 py-4 glass shadow-md">
+		<div class="flex items-center gap-3">
+			<div class="w-8 h-8 bg-cyan-500 rounded-xl"></div>
+			<span class="font-semibold tracking-tight">Omendon AI</span>
+		</div>
+		<nav class="flex gap-6 text-sm font-medium">
+			<button onclick="showPage('page1')" id="nav1" class="hover:text-cyan-400">Onboarding</button>
+			<button onclick="showPage('page2')" id="nav2" class="hover:text-cyan-400">Market Research</button>
+			<button onclick="showPage('page3')" id="nav3" class="hover:text-cyan-400">Roadmap</button>
+			<button onclick="showPage('page4')" id="nav4" class="hover:text-cyan-400">Services</button>
+			<button onclick="showPage('page5')" id="nav5" class="hover:text-cyan-400">Partners</button>
+			<button onclick="showPage('page6')" id="nav6" class="hover:text-cyan-400">Monitoring</button>
+			<button onclick="showPage('page7')" id="nav7" class="hover:text-cyan-400">Equity Bank</button>
+		</nav>
+	</header>
+
+	<div class="flex flex-1">
+		<!-- SIDEBAR -->
+		<aside class="w-64 glass p-4 text-sm border-r border-white/10 hidden md:block">
+			<p class="text-xs uppercase tracking-wider text-white/60 mb-3">Navigation</p>
+			<ul class="space-y-3">
+				<li><button onclick="showPage('page1')" id="side1" class="hover:text-cyan-400">AI Onboarding</button></li>
+				<li><button onclick="showPage('page2')" id="side2" class="hover:text-cyan-400">Market Research</button></li>
+				<li><button onclick="showPage('page3')" id="side3" class="hover:text-cyan-400">Expansion Roadmap</button></li>
+				<li><button onclick="showPage('page4')" id="side4" class="hover:text-cyan-400">Service Packages</button></li>
+				<li><button onclick="showPage('page5')" id="side5" class="hover:text-cyan-400">Partner Matchmaking</button></li>
+				<li><button onclick="showPage('page6')" id="side6" class="hover:text-cyan-400">Execution Monitoring</button></li>
+				<li><button onclick="showPage('page7')" id="side7" class="hover:text-cyan-400">Equity Bank & Outcomes</button></li>
+			</ul>
+		</aside>
+
+		<!-- MAIN CONTENT -->
+		<main class="flex-1 overflow-y-auto p-8 space-y-12">
+			<!-- PAGE 7: Equity Bank & Outcomes -->
+			<section id="page7" class="hidden space-y-8">
+				<h1 class="text-3xl font-extrabold">Equity Bank & Outcomes</h1>
+				<p class="text-gray-300 max-w-3xl">Track your equity distribution, KPIs, and projected outcomes.</p>
+				<div class="grid md:grid-cols-2 gap-8">
+					<div class="glass p-6 rounded-xl">
+						<h2 class="font-semibold mb-3">Equity Distribution</h2>
+						<canvas id="equityChart" height="180"></canvas>
+						<ul class="mt-6 space-y-2 text-sm text-white/80">
+							<li><span class="font-bold">Founders:</span> 40%</li>
+							<li><span class="font-bold">Investors:</span> 30%</li>
+							<li><span class="font-bold">Partners:</span> 20%</li>
+							<li><span class="font-bold">Employees:</span> 10%</li>
+						</ul>
+					</div>
+					<div class="glass p-6 rounded-xl">
+						<h2 class="font-semibold mb-3">Key Performance Indicators</h2>
+						<canvas id="kpiChart" height="180"></canvas>
+						<ul class="mt-6 space-y-2 text-sm text-white/80">
+							<li><span class="font-bold">Revenue:</span> $2.5M</li>
+							<li><span class="font-bold">Growth:</span> 70%</li>
+							<li><span class="font-bold">Retention:</span> 90%</li>
+							<li><span class="font-bold">NPS:</span> 75</li>
+							<li><span class="font-bold">ROI:</span> 15%</li>
+						</ul>
+					</div>
+				</div>
+				<div class="glass p-6 rounded-xl mt-8">
+					<h2 class="font-semibold mb-3">Projected Outcomes</h2>
+					<div class="grid md:grid-cols-3 gap-6">
+						<div class="glass p-4 rounded-lg">
+							<p class="text-sm text-white/70">Next Funding Round</p>
+							<p class="text-2xl font-bold">Q1 2026</p>
+						</div>
+						<div class="glass p-4 rounded-lg">
+							<p class="text-sm text-white/70">Expected Valuation</p>
+							<p class="text-2xl font-bold">$12M</p>
+						</div>
+						<div class="glass p-4 rounded-lg">
+							<p class="text-sm text-white/70">Exit Strategy</p>
+							<p class="text-2xl font-bold">Acquisition</p>
+						</div>
+					</div>
+				</div>
+				<div class="flex justify-between mt-8"><button onclick="showPage('page6')" class="px-6 py-3 rounded-lg glass hover:bg-white/10">← Back to Monitoring</button></div>
+			</section>
+			<!-- PAGE 1: Onboarding -->
+			<section id="page1" class="space-y-8">
+				<h1 class="text-3xl font-extrabold">AI Onboarding: Your Global Expansion Journey</h1>
+				<p class="text-gray-300 max-w-3xl">Edit the pre-filled example data for demo.</p>
+				<div class="glass rounded-xl p-6 md:p-8 space-y-8">
+					<div>
+						<h2 class="text-2xl font-bold mb-3">1. Company Profile</h2>
+						<div class="grid md:grid-cols-2 gap-4">
+							<input value="Omendon Labs Pvt. Ltd." class="glass p-3 rounded-lg w-full placeholder-white/50" />
+							<input value="SaaS – B2B Analytics" class="glass p-3 rounded-lg w-full" />
+							<input value="51–200 employees" class="glass p-3 rounded-lg w-full" />
+							<input value="India, USA (HQ), EU (target)" class="glass p-3 rounded-lg w-full" />
+						</div>
+					</div>
+					<div>
+						<h2 class="text-2xl font-bold mb-3">2. Business Objectives</h2>
+						<textarea class="glass p-3 rounded-lg w-full" rows="3">Enter EMEA with a reseller-led motion; first 100 customers within 12 months; maintain CAC < $40.</textarea>
+						<div class="grid md:grid-cols-2 gap-4 mt-4">
+							<input value="+30% YoY" class="glass p-3 rounded-lg w-full" />
+							<input value="Q3 2025 – Q2 2026" class="glass p-3 rounded-lg w-full" />
+						</div>
+					</div>
+					<div class="flex justify-end">
+						<button onclick="showPage('page2')" class="px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:scale-105 transition">Next: Market Research →</button>
+					</div>
+				</div>
+			</section>
+					<!-- PAGE 2: Market Research -->
+					<section id="page2" class="hidden space-y-8">
+						<h1 class="text-3xl font-extrabold">AI‑Powered Market Research Report</h1>
+						<p class="text-gray-300 max-w-3xl">Comprehensive insights for your EMEA entry. Sample data for demo.</p>
+						<div class="grid md:grid-cols-4 gap-6">
+							<div class="glass p-4 rounded-lg hover:scale-105 transition"><p class="text-sm text-white/70">Market Size</p><p class="text-2xl font-bold">$5.2B</p></div>
+							<div class="glass p-4 rounded-lg hover:scale-105 transition"><p class="text-sm text-white/70">CAGR</p><p class="text-2xl font-bold">8.5%</p></div>
+							<div class="glass p-4 rounded-lg hover:scale-105 transition"><p class="text-sm text-white/70">Competition</p><p class="text-2xl font-bold">Moderate</p></div>
+							<div class="glass p-4 rounded-lg hover:scale-105 transition"><p class="text-sm text-white/70">CAC</p><p class="text-2xl font-bold">$35.75</p></div>
+						</div>
+						<div class="grid lg:grid-cols-2 gap-6">
+							<div class="glass p-6 rounded-xl"><h4 class="font-semibold mb-3">Market Opportunity Score</h4><canvas id="opportunityChart"></canvas></div>
+							<div class="glass p-6 rounded-xl"><h4 class="font-semibold mb-3">Target Audience Demographics</h4><canvas id="demographicsChart"></canvas></div>
+							<div class="glass p-6 rounded-xl"><h4 class="font-semibold mb-3">Consumer Digital Behavior</h4><canvas id="behaviorChart"></canvas></div>
+							<div class="glass p-6 rounded-xl"><h4 class="font-semibold mb-3">Market Growth Projections</h4><canvas id="growthChart"></canvas></div>
+						</div>
+						<div class="flex justify-between"><button onclick="showPage('page1')" class="px-6 py-3 rounded-lg glass hover:bg-white/10">← Back</button><button onclick="showPage('page3')" class="px-6 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-pink-600 hover:scale-105 transition">Next: Roadmap →</button></div>
+					</section>
+					<!-- PAGE 3: Expansion Roadmap -->
+					<section id="page3" class="hidden space-y-8">
+						<h1 class="text-3xl font-extrabold">Your Global Expansion Roadmap</h1>
+						<p class="text-gray-300 max-w-3xl">Phases, milestones, and KPIs for the next 12 months.</p>
+						<div class="grid lg:grid-cols-3 gap-6">
+							<div class="glass p-6 rounded-lg hover:scale-105 transition"><h2 class="font-semibold">Phase 1: Market Validation</h2><ul class="list-disc ml-4 text-gray-300 mt-3 space-y-1"><li>10 interviews per market</li><li>ICP & messaging</li><li>KPI: ≥ 8% demo rate</li></ul></div>
+							<div class="glass p-6 rounded-lg hover:scale-105 transition"><h2 class="font-semibold">Phase 2: Legal & Setup</h2><ul class="list-disc ml-4 text-gray-300 mt-3 space-y-1"><li>EU entity & GDPR</li><li>Payroll & banking</li><li>KPI: 6‑week sign‑off</li></ul></div>
+							<div class="glass p-6 rounded-lg hover:scale-105 transition"><h2 class="font-semibold">Phase 3: GTM Launch</h2><ul class="list-disc ml-4 text-gray-300 mt-3 space-y-1"><li>5 reseller partners</li><li>Localized pricing</li><li>KPI: 100 accounts</li></ul></div>
+						</div>
+						<div class="flex justify-between"><button onclick="showPage('page2')" class="px-6 py-3 rounded-lg glass hover:bg-white/10">← Back</button><button onclick="showPage('page4')" class="px-6 py-3 rounded-lg bg-gradient-to-r from-indigo-500 to-cyan-600 hover:scale-105 transition">Next: Services →</button></div>
+					</section>
+					<!-- PAGE 4: Service Packages -->
+					<section id="page4" class="hidden space-y-8">
+						<h1 class="text-3xl font-extrabold">Explore Our Curated Service Packages</h1>
+						<p class="text-gray-300">Choose a package that fits your plan.</p>
+						<div class="grid md:grid-cols-3 gap-6">
+							<div class="glass p-6 rounded-lg hover:scale-105 transition"><h2 class="font-semibold text-lg">Market Entry Essentials</h2><p class="text-sm text-gray-400 mt-1">From $1,800/mo + 2% equity</p><button class="mt-5 px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:scale-105 transition">Select</button></div>
+							<div class="glass p-6 rounded-lg hover:scale-105 transition"><h2 class="font-semibold text-lg">Accelerated Growth</h2><p class="text-sm text-gray-400 mt-1">$3,200/mo + 4% equity</p><button class="mt-5 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-600 hover:scale-105 transition">Select</button></div>
+							<div class="glass p-6 rounded-lg hover:scale-105 transition"><h2 class="font-semibold text-lg">Enterprise Scaling</h2><p class="text-sm text-gray-400 mt-1">$6,800/mo + 6% equity</p><button class="mt-5 px-4 py-2 rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 hover:scale-105 transition">Select</button></div>
+						</div>
+						<div class="flex justify-between"><button onclick="showPage('page3')" class="px-6 py-3 rounded-lg glass hover:bg-white/10">← Back</button><button onclick="showPage('page5')" class="px-6 py-3 rounded-lg bg-gradient-to-r from-fuchsia-500 to-violet-600 hover:scale-105 transition">Next: Partners →</button></div>
+					</section>
+					<!-- PAGE 5: Partner Matchmaking & Activation -->
+					<section id="page5" class="hidden space-y-8">
+						<h1 class="text-3xl font-extrabold">Partner Matchmaking & Activation</h1>
+						<p class="text-gray-300 max-w-3xl">Discover and onboard vetted local partners.</p>
+						<!-- Sales & BizDev -->
+						<h2 class="text-xl font-bold">Sales & Business Development Partners</h2>
+						<div class="grid md:grid-cols-3 gap-6">
+							<div class="glass p-6 rounded-lg hover:scale-105 transition space-y-3"><div class="flex items-center justify-between"><h3 class="font-semibold">Global Reach Inc.</h3><span class="text-xs px-2 py-1 rounded-full bg-white/10 border border-white/10">Multi‑region</span></div><p class="text-gray-400 text-sm">Sales & Business Development</p><p class="text-yellow-400 text-sm">⭐ 4.8/5.0</p><p class="text-xs text-gray-400">USA, Europe, APAC — market entry strategy, local sales teams, lead generation.</p><div class="flex gap-2 pt-1"><button class="px-4 py-2 glass rounded-lg">View Profile</button><button class="px-4 py-2 bg-indigo-500 rounded-lg hover:bg-indigo-600">Initiate</button></div></div>
+							<div class="glass p-6 rounded-lg hover:scale-105 transition space-y-3"><div class="flex items-center justify-between"><h3 class="font-semibold">Market Dynamics Group</h3><span class="text-xs px-2 py-1 rounded-full bg-white/10 border border-white/10">EMEA</span></div><p class="text-gray-400 text-sm">Sales & Business Development</p><p class="text-yellow-400 text-sm">⭐ 4.5/5.0</p><p class="text-xs text-gray-400">Distribution channels, partner recruitment, sales training.</p><div class="flex gap-2 pt-1"><button class="px-4 py-2 glass rounded-lg">View Profile</button><button class="px-4 py-2 bg-indigo-500 rounded-lg hover:bg-indigo-600">Initiate</button></div></div>
+							<div class="glass p-6 rounded-lg hover:scale-105 transition space-y-3"><div class="flex items-center justify-between"><h3 class="font-semibold">Horizon Growth Co.</h3><span class="text-xs px-2 py-1 rounded-full bg-white/10 border border-white/10">LATAM</span></div><p class="text-gray-400 text-sm">Sales & Business Development</p><p class="text-yellow-400 text-sm">⭐ 4.7/5.0</p><p class="text-xs text-gray-400">Local representation, negotiation support, CRM integration.</p><div class="flex gap-2 pt-1"><button class="px-4 py-2 glass rounded-lg">View Profile</button><button class="px-4 py-2 bg-indigo-500 rounded-lg hover:bg-indigo-600">Initiate</button></div></div>
+						</div>
+						<!-- Legal & Compliance -->
+						<h2 class="text-xl font-bold">Legal & Compliance Partners</h2>
+						<div class="grid md:grid-cols-3 gap-6">
+							<div class="glass p-6 rounded-lg hover:scale-105 transition space-y-3"><h3 class="font-semibold">Lex International</h3><p class="text-gray-400 text-sm">Legal & Compliance</p><p class="text-yellow-400 text-sm">⭐ 4.9/5.0</p><p class="text-xs text-gray-400">USA, Canada — corporate law, IP, regulatory compliance.</p><div class="flex gap-2"><button class="px-4 py-2 glass rounded-lg">View</button><button class="px-4 py-2 bg-indigo-500 rounded-lg hover:bg-indigo-600">Initiate</button></div></div>
+							<div class="glass p-6 rounded-lg hover:scale-105 transition space-y-3"><h3 class="font-semibold">JurisGlobal Solutions</h3><p class="text-gray-400 text-sm">Legal & Compliance</p><p class="text-yellow-400 text-sm">⭐ 4.6/5.0</p><p class="text-xs text-gray-400">EU, UK — contracts, employment law, litigation support.</p><div class="flex gap-2"><button class="px-4 py-2 glass rounded-lg">View</button><button class="px-4 py-2 bg-indigo-500 rounded-lg hover:bg-indigo-600">Initiate</button></div></div>
+							<div class="glass p-6 rounded-lg hover:scale-105 transition space-y-3"><h3 class="font-semibold">Compliance Bridge</h3><p class="text-gray-400 text-sm">Legal & Compliance</p><p class="text-yellow-400 text-sm">⭐ 4.7/5.0</p><p class="text-xs text-gray-400">Europe — GDPR, local licenses, tax advisory.</p><div class="flex gap-2"><button class="px-4 py-2 glass rounded-lg">View</button><button class="px-4 py-2 bg-indigo-500 rounded-lg hover:bg-indigo-600">Initiate</button></div></div>
+						</div>
+						<!-- Operations & Logistics -->
+						<h2 class="text-xl font-bold">Operations & Logistics Partners</h2>
+						<div class="grid md:grid-cols-2 gap-6">
+							<div class="glass p-6 rounded-lg hover:scale-105 transition space-y-3"><h3 class="font-semibold">OptiLogistics</h3><p class="text-gray-400 text-sm">Operations & Logistics</p><p class="text-yellow-400 text-sm">⭐ 4.7/5.0</p><p class="text-xs text-gray-400">Global — supply chain, warehousing, customs brokerage.</p><div class="flex gap-2"><button class="px-4 py-2 glass rounded-lg">View</button><button class="px-4 py-2 bg-indigo-500 rounded-lg hover:bg-indigo-600">Initiate</button></div></div>
+							<div class="glass p-6 rounded-lg hover:scale-105 transition space-y-3"><h3 class="font-semibold">Nexus Operations</h3><p class="text-gray-400 text-sm">Operations & Logistics</p><p class="text-yellow-400 text-sm">⭐ 4.5/5.0</p><p class="text-xs text-gray-400">Asia — workforce, IT, vendor management.</p><div class="flex gap-2"><button class="px-4 py-2 glass rounded-lg">View</button><button class="px-4 py-2 bg-indigo-500 rounded-lg hover:bg-indigo-600">Initiate</button></div></div>
+						</div>
+						<!-- Onboarding Progress -->
+						<div class="glass p-6 rounded-lg grid lg:grid-cols-2 gap-6 items-center">
+							<div>
+								<h2 class="text-lg font-bold mb-2">Onboarding Progress</h2>
+								<div class="w-full bg-gray-700 h-3 rounded-lg overflow-hidden"><div class="bg-indigo-500 h-3" style="width: 45%"></div></div>
+								<p class="text-sm text-gray-300 mt-2">Overall status: <span class="text-white font-bold">45% Complete</span></p>
+								<div class="mt-3 grid grid-cols-2 gap-3"><div class="glass p-3 rounded-lg"><p class="text-xs text-white/70">Contract Signed</p><p class="text-lg font-semibold">Lex International</p></div><div class="glass p-3 rounded-lg"><p class="text-xs text-white/70">Pending Review</p><p class="text-lg font-semibold">OptiLogistics</p></div></div>
+							</div>
+							<div class="glass p-4 rounded-xl"><h4 class="font-semibold mb-3">Partners by Region</h4><canvas id="partnersByRegion"></canvas></div>
+						</div>
+						<div class="flex justify-between"><button onclick="showPage('page4')" class="px-6 py-3 rounded-lg glass hover:bg-white/10">← Back</button><button onclick="showPage('page6')" class="px-6 py-3 rounded-lg bg-gradient-to-r from-violet-500 to-purple-600 hover:scale-105 transition">Go to Monitoring →</button></div>
+					</section>
+					<!-- PAGE 6: Execution Monitoring Dashboard -->
+					<section id="page6" class="hidden space-y-8">
+						<h1 class="text-3xl font-extrabold">Execution Monitoring Dashboard</h1>
+						<div class="grid lg:grid-cols-3 gap-6">
+							<!-- Overall Expansion Progress -->
+							<div class="lg:col-span-2 glass rounded-2xl p-6">
+								<h2 class="text-lg font-semibold">Overall Expansion Progress</h2>
+								<p class="text-sm text-white/70 mb-4">Track the cumulative progress of your global market entry.</p>
+								<div class="flex items-center gap-4">
+									<div class="w-full bg-white/10 h-3 rounded-full overflow-hidden">
+										<div class="h-3 rounded-full bg-gradient-to-r from-indigo-500 to-blue-500" style="width:75%"></div>
+									</div>
+									<span class="text-white font-semibold">75%</span>
+								</div>
+								<div class="grid sm:grid-cols-4 gap-4 mt-4 text-sm">
+									<div class="glass rounded-lg p-3">
+										<p class="text-white/60">Markets Launched</p>
+										<p class="text-xl font-bold">3/5</p>
+									</div>
+									<div class="glass rounded-lg p-3">
+										<p class="text-white/60">Partners Activated</p>
+										<p class="text-xl font-bold">12</p>
+									</div>
+									<div class="glass rounded-lg p-3">
+										<p class="text-white/60">Total Investment</p>
+										<p class="text-xl font-bold">$2.5M</p>
+									</div>
+									<div class="glass rounded-lg p-3">
+										<p class="text-white/60">ROI (Projected)</p>
+										<p class="text-xl font-bold">15%</p>
+									</div>
+								</div>
+							</div>
+							<!-- Proactive Alerts -->
+							<div class="glass rounded-2xl p-6 border border-rose-400/30 bg-rose-500/10">
+								<h2 class="text-lg font-semibold text-rose-300">Proactive Alerts</h2>
+								<ul class="mt-3 space-y-2 text-sm">
+									<li class="flex gap-2"><span class="text-rose-400">⚠</span><span>Legal documentation for Brazil is pending review by local counsel.</span></li>
+									<li class="flex gap-2"><span class="text-rose-400">⚠</span><span>Indian market entry compliance audit requires immediate attention.</span></li>
+								</ul>
+							</div>
+						</div>
+						<!-- Task Status Tracking -->
+						<div class="glass rounded-2xl p-6">
+							<h2 class="text-lg font-semibold mb-4">Task Status Tracking</h2>
+							<div class="overflow-x-auto">
+								<table class="min-w-full text-sm">
+									<thead class="text-white/70">
+										<tr class="text-left">
+											<th class="py-2 pr-6">Task Name</th>
+											<th class="py-2 pr-6">Status</th>
+											<th class="py-2 pr-6">Assigned To</th>
+											<th class="py-2">Due Date</th>
+										</tr>
+									</thead>
+									<tbody class="divide-y divide-white/10">
+										<tr class="hover:bg-white/5">
+											<td class="py-3 pr-6">Establish Legal Entity in Germany</td>
+											<td class="py-3 pr-6"><span class="badge bg-blue-500/20 text-blue-300">In Progress</span></td>
+											<td class="py-3 pr-6">Legal Team</td>
+											<td class="py-3">2024-08-15</td>
+										</tr>
+										<tr class="hover:bg-white/5">
+											<td class="py-3 pr-6">Local Market Entry Strategy Review</td>
+											<td class="py-3 pr-6"><span class="badge bg-emerald-500/20 text-emerald-300">Completed</span></td>
+											<td class="py-3 pr-6">AI Insights</td>
+											<td class="py-3">2024-07-20</td>
+										</tr>
+										<tr class="hover:bg-white/5">
+											<td class="py-3 pr-6">Recruit Head of Sales - Brazil</td>
+											<td class="py-3 pr-6"><span class="badge bg-amber-500/20 text-amber-300">Pending</span></td>
+											<td class="py-3 pr-6">HR Partner</td>
+											<td class="py-3">2024-09-01</td>
+										</tr>
+										<tr class="hover:bg-white/5">
+											<td class="py-3 pr-6">Secure Initial Client Contracts - Japan</td>
+											<td class="py-3 pr-6"><span class="badge bg-blue-500/20 text-blue-300">In Progress</span></td>
+											<td class="py-3 pr-6">Sales Team</td>
+											<td class="py-3">2024-08-30</td>
+										</tr>
+										<tr class="hover:bg-white/5">
+											<td class="py-3 pr-6">Local Regulations Compliance Check - India</td>
+											<td class="py-3 pr-6"><span class="badge bg-rose-500/20 text-rose-300">Overdue</span></td>
+											<td class="py-3 pr-6">Compliance Partner</td>
+											<td class="py-3">2024-07-05</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!-- Meetings & Communication -->
+						<div class="grid lg:grid-cols-2 gap-6">
+							<div class="glass rounded-2xl p-6">
+								<h2 class="text-lg font-semibold">Meeting Summaries</h2>
+								<div class="mt-4 space-y-6 text-sm">
+									<div>
+										<p class="font-semibold">Germany Legal Entity Kick‑off</p>
+										<p class="text-white/60">July 25, 2024</p>
+										<p class="mt-2 text-white/80">Discussion on required documents for GmbH formation. AI highlighted potential delays due to registry backlog; expedited collection agreed.</p>
+										<p class="mt-2 text-white/60">Key Actions:</p>
+										<ul class="list-disc ml-6 text-white/80">
+											<li>Submit Articles of Association to legal partner.</li>
+											<li>Follow up on registry status weekly.</li>
+										</ul>
+									</div>
+									<div>
+										<p class="font-semibold">Brazil Market Entry Strategy Call</p>
+										<p class="text-white/60">July 22, 2024</p>
+									</div>
+								</div>
+							</div>
+							<div class="glass rounded-2xl p-6">
+								<h2 class="text-lg font-semibold">Communication Channels</h2>
+								<ul class="mt-4 space-y-4 text-sm">
+									<li class="flex gap-3 items-start"><span class="w-2 h-2 rounded-full bg-emerald-400 mt-2"></span><div><p class="font-semibold">Sarah Omendon <span class="text-white/50 font-normal">• 2m ago</span></p><p class="text-white/80">Germany legal registration documents have been submitted. Awaiting confirmation.</p></div></li>
+									<li class="flex gap-3 items-start"><span class="w-2 h-2 rounded-full bg-sky-400 mt-2"></span><div><p class="font-semibold">Michael Partner (HR) <span class="text-white/50 font-normal">• 15m ago</span></p><p class="text-white/80">First batch of candidate profiles for Brazil Sales Head shared.</p></div></li>
+									<li class="flex gap-3 items-start"><span class="w-2 h-2 rounded-full bg-indigo-400 mt-2"></span><div><p class="font-semibold">Omendon AI Assistant <span class="text-white/50 font-normal">• 30m ago</span></p><p class="text-white/80">Automated check: Japanese market sentiment slightly down. Recommend message review.</p></div></li>
+									<li class="flex gap-3 items-start"><span class="w-2 h-2 rounded-full bg-lime-400 mt-2"></span><div><p class="font-semibold">Client Success <span class="text-white/50 font-normal">• 1h ago</span></p><p class="text-white/80">Request received for Q3 financial projections for Germany.</p></div></li>
+								</ul>
+							</div>
+						</div>
+						<!-- Overall Execution Progress -->
+						<div class="glass rounded-2xl p-6">
+							<h2 class="text-lg font-semibold mb-4">Overall Execution Progress</h2>
+							<canvas id="execProgressChart" height="110"></canvas>
+						</div>
+						<div class="flex justify-between"><button onclick="showPage('page5')" class="px-6 py-3 rounded-lg glass hover:bg-white/10">← Back to Partners</button></div>
+					</section>
+		</main>
+	</div>
+
+	<!-- Footer -->
+	<footer class="px-10 py-6 bg-black/40 text-gray-400 text-sm flex justify-between">
+		<p>© 2025 Omendon AI · All Rights Reserved</p>
+		<div class="space-x-4">
+			<a href="#" class="hover:text-cyan-400">Company</a>
+			<a href="#" class="hover:text-cyan-400">Legal</a>
+		</div>
+	</footer>
+
+	<!-- Scripts -->
+	<script>
+		function showPage(id) {
+			document.querySelectorAll('main section').forEach((sec) => sec.classList.add('hidden'));
+			document.getElementById(id).classList.remove('hidden');
+			// active state
+			const ids = ['nav1','nav2','nav3','nav4','nav5','nav6','nav7','side1','side2','side3','side4','side5','side6','side7'];
+			ids.forEach((n) => { const el = document.getElementById(n); if (el) el.classList.remove('active-link'); });
+			if (id==='page1'){ nav1.classList.add('active-link'); side1.classList.add('active-link'); }
+			if (id==='page2'){ nav2.classList.add('active-link'); side2.classList.add('active-link'); }
+			if (id==='page3'){ nav3.classList.add('active-link'); side3.classList.add('active-link'); }
+			if (id==='page4'){ nav4.classList.add('active-link'); side4.classList.add('active-link'); }
+			if (id==='page5'){ nav5.classList.add('active-link'); side5.classList.add('active-link'); }
+			if (id==='page6'){ nav6.classList.add('active-link'); side6.classList.add('active-link'); }
+			if (id==='page7'){ nav7.classList.add('active-link'); side7.classList.add('active-link'); }
+		}
+		// default to Page 1
+		showPage('page1');
+		// Charts for all pages
+		window.addEventListener('load', () => {
+						// --- PAGE 2: Market Research Charts ---
+						const opportunityChart = document.getElementById('opportunityChart');
+						if (opportunityChart) {
+							new Chart(opportunityChart, {
+								type: 'doughnut',
+								data: {
+									labels: ['High', 'Medium', 'Low'],
+									datasets: [{
+										data: [65, 25, 10],
+										backgroundColor: ['#6366f1', '#06b6d4', '#f59e42'],
+									}]
+								},
+								options: {plugins: {legend: {labels: {color: '#fff'}}}}
+							});
+						}
+						const demographicsChart = document.getElementById('demographicsChart');
+						if (demographicsChart) {
+							new Chart(demographicsChart, {
+								type: 'bar',
+								data: {
+									labels: ['18-24', '25-34', '35-44', '45-54', '55+'],
+									datasets: [{
+										label: 'Users',
+										data: [120, 200, 150, 80, 40],
+										backgroundColor: '#6366f1',
+									}]
+								},
+								options: {scales: {x: {ticks: {color: '#fff'}}, y: {ticks: {color: '#fff'}}}, plugins: {legend: {labels: {color: '#fff'}}}}
+							});
+						}
+						const behaviorChart = document.getElementById('behaviorChart');
+						if (behaviorChart) {
+							new Chart(behaviorChart, {
+								type: 'pie',
+								data: {
+									labels: ['Mobile', 'Desktop', 'Tablet'],
+									datasets: [{
+										data: [60, 30, 10],
+										backgroundColor: ['#06b6d4', '#6366f1', '#f59e42'],
+									}]
+								},
+								options: {plugins: {legend: {labels: {color: '#fff'}}}}
+							});
+						}
+						const growthChart = document.getElementById('growthChart');
+						if (growthChart) {
+							new Chart(growthChart, {
+								type: 'line',
+								data: {
+									labels: ['2023', '2024', '2025', '2026', '2027'],
+									datasets: [{
+										label: 'Growth ($M)',
+										data: [2.1, 3.2, 4.8, 6.5, 8.2],
+										borderColor: '#6366f1',
+										backgroundColor: 'rgba(99,102,241,0.2)',
+										fill: true,
+										tension: 0.4
+									}]
+								},
+								options: {scales: {x: {ticks: {color: '#fff'}}, y: {ticks: {color: '#fff'}}}, plugins: {legend: {labels: {color: '#fff'}}}}
+							});
+						}
+
+						// --- PAGE 7: Equity Bank & Outcomes Charts ---
+						const equityChart = document.getElementById('equityChart');
+						if (equityChart) {
+							new Chart(equityChart, {
+								type: 'pie',
+								data: {
+									labels: ['Founders', 'Investors', 'Partners', 'Employees'],
+									datasets: [{
+										data: [40, 30, 20, 10],
+										backgroundColor: ['#6366f1', '#06b6d4', '#f59e42', '#a3e635'],
+									}]
+								},
+								options: {plugins: {legend: {labels: {color: '#fff'}}}}
+							});
+						}
+						const kpiChart = document.getElementById('kpiChart');
+						if (kpiChart) {
+							new Chart(kpiChart, {
+								type: 'radar',
+								data: {
+									labels: ['Revenue', 'Growth', 'Retention', 'NPS', 'ROI'],
+									datasets: [{
+										label: 'KPI Score',
+										data: [85, 70, 90, 75, 60],
+										backgroundColor: 'rgba(99,102,241,0.2)',
+										borderColor: '#6366f1',
+										pointBackgroundColor: '#6366f1',
+									}]
+								},
+								options: {plugins: {legend: {labels: {color: '#fff'}}}}
+							});
+						}
+		});
+		// Conversational AI chat logic (from index.html)
+		const chatWindow = document.getElementById("chatWindow");
+		const userInput = document.getElementById("userInput");
+		const botReplies = [
+			"Hello! 👋 I’m Anya, here to guide your expansion journey.",
+			"That sounds interesting! Can you tell me more about your target market?",
+			"Great choice 🚀. Are you focusing on B2B or B2C expansion?",
+			"Thanks for sharing! I recommend exploring growth opportunities in North America and Asia.",
+			"I’ll prepare a personalized strategy for you."
+		];
+		let replyIndex = 0;
+		function addMessage(sender, text) {
+			const messageDiv = document.createElement("div");
+			if (sender === "user") {
+				messageDiv.className = "flex justify-end items-start space-x-2";
+				messageDiv.innerHTML = `
+					<div class="bg-cyan-500 px-4 py-2 rounded-2xl text-white max-w-lg">${text}</div>
+					<div class="w-8 h-8 bg-gray-300 rounded-full"></div>
+				`;
+			} else {
+				messageDiv.className = "flex items-start space-x-2";
+				messageDiv.innerHTML = `
+					<div class="w-8 h-8 bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-full flex items-center justify-center">A</div>
+					<div class="bg-white/10 px-4 py-2 rounded-2xl text-gray-200 max-w-lg">${text}</div>
+				`;
+			}
+			chatWindow.appendChild(messageDiv);
+			chatWindow.scrollTop = chatWindow.scrollHeight;
+		}
+		function sendMessage() {
+			const text = userInput.value.trim();
+			if (!text) return;
+			addMessage("user", text);
+			userInput.value = "";
+			setTimeout(() => {
+				const reply = botReplies[replyIndex % botReplies.length];
+				addMessage("bot", reply);
+				replyIndex++;
+			}, 1000);
+		}
+		if (userInput) {
+			userInput.addEventListener("keypress", (e) => {
+				if (e.key === "Enter") {
+					sendMessage();
+				}
+			});
+		}
+	</script>
+</body>
+</html>
